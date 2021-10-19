@@ -1,0 +1,35 @@
+public class Main {
+    public static void main(String[] args) {
+        MelonStorage melonStorage = new MelonStorage(300);
+	      System.out.println(melonStorage.getMelonAmount());
+        melonStorage.reduceMelonAmount(100);
+        System.out.println(melonStorage.getMelonAmount());
+
+    }
+}
+
+public class MelonStorage {
+    private int melonAmount;
+    MelonStorage(newMelonAmount) {
+        melonAmount = newMelonAmount;
+    }
+    public int  getMelonAmount() {
+        return melonAmount;
+    }
+
+    public void reduceMelonAmount(int amountToTake) {
+        if (amountToTake > melonAmount) {
+            int difference = amountToTake - melonAmount;
+
+            System.out.println("Не удалось вывезти: " + difference);
+
+			melonAmount = 0;
+
+        } else {
+            melonAmount = melonAmount - amountToTake;
+  
+        }
+    }
+
+    
+}
