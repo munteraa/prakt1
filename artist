@@ -1,0 +1,13 @@
+public class Main {    public static void main(String[] args) {
+         Artist Pointillist = new Artist();
+  Artist Impressionist = new Artist();
+  }
+}public class Artist {class Pointillist extends Artist {
+  public Pointillist();
+  System.out.println("Художник -" + Pointillist);
+}
+class Impressionist extends Artist {
+  public Impressionist();
+  System.out.println("Художник -" + Impressionist);
+}
+}
