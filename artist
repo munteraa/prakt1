@@ -4,29 +4,37 @@ public class Praktikum {
         Transport boat = new Boat(false);
         System.out.println("Является ли транспорт наземным: " + boat.isGround());
 
-        Transport motorcycle = new Motorcycle(true, 2);
+        GroundTransport motorcycle = new Motorcycle(true, 2);
         System.out.println("Является ли транспорт наземным: " + motorcycle.isGround());
         System.out.println("Количество колёс: " + motorcycle.getWheelsCount());
 
-        Transport car = new Car(true, 4);
+        GroundTransport car = new Car(true, 4);
         System.out.println("Является ли транспорт наземным: " + car.isGround());
         System.out.println("Количество колёс: " + car.getWheelsCount());
 
-        Transport sportcar = new Sportcar(true, 4);
+        Car sportcar = new Sportcar(true, 4);
         System.out.println("Является ли транспорт наземным: " + sportcar.isGround());
         System.out.println("Количество колёс: " + sportcar.getWheelsCount());
     }
 
 }
 
-
 public interface Transport {
     boolean isGround();
-    int wheelsCount();
+}
+
+public abstract class GroundTransport implements Transport {
+     public GroundTransport(boolean ground, int wheelsCount) {
+    };
+    boolean ground;
+    int wheelsCount;
+    abstract public boolean isGround();
+    abstract public int getWheelsCount();
+
 }
 
 public class Boat implements Transport {
-    
+
     private final boolean ground;
 
     public Boat(boolean ground) {
@@ -39,104 +47,54 @@ public class Boat implements Transport {
     }
 }
 
-public class Motorcycle implements Transport {
-    
-    private final boolean ground;
-    private final int wheelsCount;
-
+public class Motorcycle extends GroundTransport {
     public Motorcycle(boolean ground, int wheelsCount) {
-        this.ground = ground;
-        this.wheelsCount = wheelsCount;
+        super(ground, wheelsCount);
     }
 
     @Override
-    public boolean isGround() {
+    public boolean isGround(){
         return ground;
     }
 
-    public int getWheelsCount() {
+    @Override
+    public int getWheelsCount(){
         return wheelsCount;
     }
 }
 
-public class Car implements Transport {
-    
-    private final boolean ground;
-    private final int wheelsCount;
+public class Car extends GroundTransport {
 
     public Car(boolean ground, int wheelsCount) {
-        this.ground = ground;
-        this.wheelsCount = wheelsCount;
+        super(ground, wheelsCount);
     }
 
     @Override
-    public boolean isGround() {
+    public boolean isGround(){
         return ground;
     }
 
-    public int getWheelsCount() {
+    @Override
+    public int getWheelsCount(){
         return wheelsCount;
     }
+
 }
 
-public class Sportcar implements Transport {
-    
-    private final boolean ground;
-    private final int wheelsCount;
+public class Sportcar extends Car {
 
     public Sportcar(boolean ground, int wheelsCount) {
-        this.ground = ground;
-        this.wheelsCount = wheelsCount;
+        super(ground, wheelsCount);
     }
-    
+
     @Override
-    public boolean isGround() {
+    public boolean isGround(){
         return ground;
     }
-    
-    public int getWheelsCount() {
+
+    @Override
+    public int getWheelsCount(){
         return wheelsCount;
     }
+
 }
-
-
-
-
-
-
-
-
-
-Как объявить интерфейс и реализовать его в классе
-Ты уже знаешь, что такое интерфейс. В этом уроке ты научишься его объявлять.
-Чтобы объявить интерфейс, понадобится ключевое слово interface. Например, так можно объявить интерфейс с именем Animal:
-
-public interface Animal { // объявлен интерфейс
-} 
-
-Методы в интерфейсе нужно писать без тела — как и в абстрактных классах.
-Ключевое слово abstract указывать не нужно: все методы интерфейса — и так абстрактные по умолчанию.
-
-public interface Animal { // объявлен интерфейс
-  void eat(); // объявлен метод интерфейса
-} 
-
-Теперь интерфейс нужно реализовать — написать реализацию в классе-наследнике.
-Чтобы класс реализовывал интерфейс, нужно написать ключевое слово implements и имя интерфейса. Затем нужно переопределить абстрактный метод:
-
-public class Fish implements Animal { // реализован интерфейс Animal
-  @Override // переопределён абстрактный метод интерфейса Animal 
-  public void eat() {
-    System.out.println("Ем планктон");
-  }
-} 
-
-Класс обязательно должен реализовать все методы интерфейса, иначе при компиляции возникнет ошибка.
-Например, класс Rabbit применяет интерфейс Animal, но не реализует его метод. Код не скомпилируется:
-
-public class Rabbit implements Animal { // реализация интерфейса Animal
-  // при компиляции произойдёт ошибка
-  // java: Rabbit is not abstract and does not override abstract method eat() in Animal
-} 
-
-Если класс не реализовывает все методы интерфейса, он должен объявить себя абстрактным.
