@@ -19,9 +19,8 @@ public class Praktikum {
 
 }
 
-// в качестве корня иерархии всех транспортных средств используй интерфейс Transport
+
 public interface Transport {
-    // ниже объяви методы, которые будут общими для всей иерархии классов
     boolean isGround();
     int wheelsCount();
 }
