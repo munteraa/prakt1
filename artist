@@ -1,13 +1,101 @@
-public class Main {    public static void main(String[] args) {
-         Artist Pointillist = new Artist();
-  Artist Impressionist = new Artist();
-  }
-}public class Artist {class Pointillist extends Artist {
-  public Pointillist();
-  System.out.println("Художник -" + Pointillist);
+public class Praktikum {
+
+    public static void main(String[] args) {
+        Transport boat = new Boat(false);
+        System.out.println("Является ли транспорт наземным: " + boat.isGround());
+
+        Transport motorcycle = new Motorcycle(true, 2);
+        System.out.println("Является ли транспорт наземным: " + motorcycle.isGround());
+        System.out.println("Количество колёс: " + motorcycle.getWheelsCount());
+
+        Transport car = new Car(true, 4);
+        System.out.println("Является ли транспорт наземным: " + car.isGround());
+        System.out.println("Количество колёс: " + car.getWheelsCount());
+
+        Transport sportcar = new Sportcar(true, 4);
+        System.out.println("Является ли транспорт наземным: " + sportcar.isGround());
+        System.out.println("Количество колёс: " + sportcar.getWheelsCount());
+    }
+
 }
-class Impressionist extends Artist {
-  public Impressionist();
-  System.out.println("Художник -" + Impressionist);
+
+// в качестве корня иерархии всех транспортных средств используй интерфейс Transport
+public interface Transport {
+    // ниже объяви методы, которые будут общими для всей иерархии классов
+    boolean isGround();
+    int wheelsCount();
 }
+
+public class Boat implements Transport {
+    
+    private final boolean ground;
+
+    public Boat(boolean ground) {
+        this.ground = ground;
+    }
+
+    @Override
+    public boolean isGround() {
+        return ground;
+    }
+}
+
+public class Motorcycle implements Transport {
+    
+    private final boolean ground;
+    private final int wheelsCount;
+
+    public Motorcycle(boolean ground, int wheelsCount) {
+        this.ground = ground;
+        this.wheelsCount = wheelsCount;
+    }
+
+    @Override
+    public boolean isGround() {
+        return ground;
+    }
+
+    public int getWheelsCount() {
+        return wheelsCount;
+    }
+}
+
+public class Car implements Transport {
+    
+    private final boolean ground;
+    private final int wheelsCount;
+
+    public Car(boolean ground, int wheelsCount) {
+        this.ground = ground;
+        this.wheelsCount = wheelsCount;
+    }
+
+    @Override
+    public boolean isGround() {
+        return ground;
+    }
+
+    public int getWheelsCount() {
+        return wheelsCount;
+    }
+}
+
+public class Sportcar implements Transport {
+    
+    private final boolean ground;
+    private final int wheelsCount;
+
+    public Sportcar(boolean ground, int wheelsCount) {
+        this.ground = ground;
+        this.wheelsCount = wheelsCount;
+    }
+    
+    @Override
+    public boolean isGround() {
+        return ground;
+    }
+    
+    public int getWheelsCount() {
+        return wheelsCount;
+    }
 }
