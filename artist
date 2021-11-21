@@ -1,100 +1,49 @@
-public class Praktikum {
 
+public class Main {
     public static void main(String[] args) {
-        Transport boat = new Boat(false);
-        System.out.println("Является ли транспорт наземным: " + boat.isGround());
-
-        GroundTransport motorcycle = new Motorcycle(true, 2);
-        System.out.println("Является ли транспорт наземным: " + motorcycle.isGround());
-        System.out.println("Количество колёс: " + motorcycle.getWheelsCount());
-
-        GroundTransport car = new Car(true, 4);
-        System.out.println("Является ли транспорт наземным: " + car.isGround());
-        System.out.println("Количество колёс: " + car.getWheelsCount());
-
-        Car sportcar = new Sportcar(true, 4);
-        System.out.println("Является ли транспорт наземным: " + sportcar.isGround());
-        System.out.println("Количество колёс: " + sportcar.getWheelsCount());
-    }
-
-}
-
-public interface Transport {
-    boolean isGround();
-}
-
-public abstract class GroundTransport implements Transport {
-     public GroundTransport(boolean ground, int wheelsCount) {
-    };
-    boolean ground;
-    int wheelsCount;
-    abstract public boolean isGround();
-    abstract public int getWheelsCount();
-
-}
-
-public class Boat implements Transport {
-
-    private final boolean ground;
-
-    public Boat(boolean ground) {
-        this.ground = ground;
-    }
-
-    @Override
-    public boolean isGround() {
-        return ground;
+        IAuthor author = new FantasyAuthor();
+        IPublisher publisher = new OldPublisher();
+        Book book = new Book(author, publisher);
+        book.printBookInfo();
     }
 }
 
-public class Motorcycle extends GroundTransport {
-    public Motorcycle(boolean ground, int wheelsCount) {
-        super(ground, wheelsCount);
-    }
+public interface IPublisher {
+    int foundationYear();
+}
 
+public class OldPublisher implements IPublisher {
     @Override
-    public boolean isGround(){
-        return ground;
-    }
 
-    @Override
-    public int getWheelsCount(){
-        return wheelsCount;
+    public int foundationYear() {
+        return 1950;
     }
 }
 
-public class Car extends GroundTransport {
-
-    public Car(boolean ground, int wheelsCount) {
-        super(ground, wheelsCount);
-    }
-
-    @Override
-    public boolean isGround(){
-        return ground;
-    }
-
-    @Override
-    public int getWheelsCount(){
-        return wheelsCount;
-    }
-
+public interface IAuthor {
+    String getName();
 }
 
-public class Sportcar extends Car {
-
-    public Sportcar(boolean ground, int wheelsCount) {
-        super(ground, wheelsCount);
-    }
-
+public class FantasyAuthor implements IAuthor {
     @Override
-    public boolean isGround(){
-        return ground;
+    public String getName() {
+        return "Фрэнк Герберт";
+    }
+}
+
+public class Book {
+    private IAuthor author;
+    private IPublisher publisher;
+    public Book(IAuthor author) {
+        this.author = author;
+    }
+    public Book(IPublisher publisher) {
+        this.publisher = publisher;
     }
 
-    @Override
-    public int getWheelsCount(){
-        return wheelsCount;
-    }
 
+    public void printBookInfo() {
+        System.out.println("Автор: " + author.getName());
+        System.out.println("Год основания издательства: " + publisher.foundationYear());
+    }
 }
